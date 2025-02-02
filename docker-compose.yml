@@ -6,6 +6,8 @@ services:
     container_name: new-api
     restart: always
     command: --log-dir /app/logs
+    env_file:
+      - ./.env
     ports:
       - "3000:3000"
     volumes:
