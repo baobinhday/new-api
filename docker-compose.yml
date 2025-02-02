@@ -12,9 +12,8 @@ services:
       - ./data:/data
       - ./logs:/app/logs
     environment:
-      - SQL_DSN=root:123456@tcp(mysql:3306)/new-api  # Point to the mysql service
       - REDIS_CONN_STRING=redis://redis
-      - TZ=Asia/Shanghai
+      - TZ=Asia/Ho_Chi_Minh
     #      - SESSION_SECRET=random_string  # 多机部署时设置，必须修改这个随机字符串！！！！！！！
     #      - NODE_TYPE=slave  # Uncomment for slave node in multi-node deployment
     #      - SYNC_FREQUENCY=60  # Uncomment if regular database syncing is needed
@@ -33,18 +32,3 @@ services:
     image: redis:latest
     container_name: redis
     restart: always
-
-  mysql:
-    image: mysql:8.2
-    container_name: mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456  # Ensure this matches the password in SQL_DSN
-      MYSQL_DATABASE: new-api
-    volumes:
-      - mysql_data:/var/lib/mysql
-    # ports:
-    #   - "3306:3306"  # If you want to access MySQL from outside Docker, uncomment
-
-volumes:
-  mysql_data:
