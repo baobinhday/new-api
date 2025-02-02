@@ -1,8 +1,5 @@
 FROM vm/ubuntu:22.04
 
-SECRET ENV SQL_DSN
-RUN echo "SQL_DSN=$SQL_DSN" >> .env
-
 # install docker-ce (from tutorial for ubuntu)
 RUN apt-get update && \
     apt-get install ca-certificates curl gnupg lsb-release && \
@@ -16,6 +13,9 @@ RUN apt-get update && \
 
 # copy the root (i.e., repository root) to /root in the runner
 COPY / /root
+
+SECRET ENV SQL_DSN
+RUN echo "SQL_DSN=$SQL_DSN" >> .env
 
 RUN docker compose pull
 RUN docker compose up -d
